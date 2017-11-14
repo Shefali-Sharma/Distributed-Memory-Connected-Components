@@ -108,35 +108,13 @@ int connected_components(std::vector<signed char>& A, int n, int q, const char* 
         
     }
     
-    /*    sleep(rank);
-     printf("\n M_helper after local max=  \n");
-     for (int i = 0; i < b; ++i) {
-     
-     for (int j = 0; j < b; ++j) {
-     std::cout << static_cast<int>(M_helper[i * b + j]) << " ";
-     }
-     std::cout << std::endl;
-     }
-     */
     MPI_Barrier(comm);
     
     MPI_Comm_split(comm, row, rank, &comm_new);
     MPI_Allreduce(M_helper.data(), R.data(), (b * b), MPI_INT, MPI_MAX, comm_new);
     MPI_Comm_free(&comm_new);
     MPI_Barrier(comm);
-    
-    /*    sleep(rank);
-     printf("\nR = \n");
-     for (int i = 0; i < b; ++i) {
-     
-     for (int j = 0; j < b; ++j) {
-     std::cout << static_cast<int>(R[i * b + j]) << " ";
-     }
-     std::cout << std::endl;
-     }
-     */
-    MPI_Barrier(comm);
-    
+   
     for (int i = 0; i < b; ++i) {
         for (int j = 0; j < b; ++j) {
             if(R[i * b + j] == j + b*col){
@@ -148,18 +126,7 @@ int connected_components(std::vector<signed char>& A, int n, int q, const char* 
         }
     }
     MPI_Barrier(comm);
-    /*    sleep(rank);
-     //M_Matrix.resize(b*b, 0);
-     printf("\nM_Matrix = \n");
-     for (int i = 0; i < b; ++i) {
-     
-     for (int j = 0; j < b; ++j) {
-     std::cout << static_cast<int>(M_Matrix[i * b + j]) << " ";
-     }
-     std::cout << std::endl;
-     }
-     MPI_Barrier(comm);
-     */
+    
     for (int i = 0; i < b; ++i) {
         localmax=0;
         for (int j = 0; j < b; ++j){
@@ -174,16 +141,7 @@ int connected_components(std::vector<signed char>& A, int n, int q, const char* 
         }
         
     }
-    /*
-     printf("\nM_Matrix After local max= \n");
-     for (int i = 0; i < b; ++i) {
-     
-     for (int j = 0; j < b; ++j) {
-     std::cout << static_cast<int>(M_Matrix[i * b + j]) << " ";
-     }
-     std::cout << std::endl;
-     }
-     */
+    
     MPI_Barrier(comm);
     
     MPI_Comm_split(comm, row, rank, &comm_new);
@@ -213,18 +171,6 @@ int connected_components(std::vector<signed char>& A, int n, int q, const char* 
     }
     
     MPI_Barrier(comm);
-    sleep(rank);
-    //M_Matrix.resize(b*b, 0);
-    /*printf("\nM_Matrix = \n");
-     for (int i = 0; i < b; ++i) {
-     
-     for (int j = 0; j < b; ++j) {
-     std::cout << static_cast<int>(M_Matrix[i * b + j]) << " ";
-     }
-     std::cout << std::endl;
-     }
-     */
-    MPI_Barrier(comm);
     
     for (int i = 0; i < b; ++i) {
         localmax=0;
@@ -241,15 +187,6 @@ int connected_components(std::vector<signed char>& A, int n, int q, const char* 
         
     }
     
-    /*    printf("\nM_Matrix After local max= \n");
-     for (int i = 0; i < b; ++i) {
-     
-     for (int j = 0; j < b; ++j) {
-     std::cout << static_cast<int>(M_Matrix[i * b + j]) << " ";
-     }
-     std::cout << std::endl;
-     }
-     */
     MPI_Barrier(comm);
     
     MPI_Comm_split(comm, row, rank, &comm_new);
@@ -257,16 +194,6 @@ int connected_components(std::vector<signed char>& A, int n, int q, const char* 
     MPI_Comm_free(&comm_new);
     MPI_Barrier(comm);
     
-    /*    sleep(rank);
-     printf("\nT = \n");
-     for (int i = 0; i < b; ++i) {
-     
-     for (int j = 0; j < b; ++j) {
-     std::cout << static_cast<int>(T[i * b + j]) << " ";
-     }
-     std::cout << std::endl;
-     }
-     */
     for (int i = 0; i < b; ++i) {
         
         for (int j = 0; j < b; ++j) {
