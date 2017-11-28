@@ -10,7 +10,6 @@
 #include <mpi.h>
 #include <unistd.h>
 
-//std::vector<signed char> P;
 int connected_components(std::vector<signed char>& A, int n, int q, const char* out, MPI_Comm comm) {
     
     int localmax;
